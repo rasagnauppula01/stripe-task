@@ -8,7 +8,9 @@ const {set,ref} = require('firebase/database')
 app.use(express.json());
 app.use(cors());
 
-
+app.get('/',(req,res)=>{
+    res.send("server running");
+});
 
 
 //checkoutapi
@@ -24,16 +26,7 @@ app.post("/api/create-checkout-session",async(req,res)=>{
             country:"IN"
         }
     });
-    //console.log(Data)
-    // const lineItems=prod.map((res)=>({
-    //     price_data:{
-    //         currency:"inr",
-    //         user_data:{
-    //             name:res.Name
-    //         },
-    //         unit_amount:res.Amount * 100,
-    //     }
-    // }))
+  
     
     const session=await stripe.checkout.sessions.create({
         payment_method_types:["card"],
